@@ -11,7 +11,7 @@ window.APP_CONFIG = {
   // Render backend URL, e.g. "https://attendance-api.onrender.com".
   // Leave empty to call the same origin that serves this page — which is what
   // you want when running everything locally through `python app.py`.
-  API_BASE_URL: "",
+  API_BASE_URL: "https://atteendence-automation-system.onrender.com",
 
   APP_NAME: "Attendance Automation System",
 
