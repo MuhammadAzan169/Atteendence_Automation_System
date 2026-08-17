@@ -26,9 +26,10 @@ services:
       # Replace both with your Vercel URL after the first frontend deploy,
       # e.g. https://attendance-system.vercel.app
       - key: CORS_ORIGINS
-        value: "*"
+        value: "https://atteendence-automation-system.vercel.app"
+      # Exactly one url — it is encoded into the printed QR poster.
       - key: FRONTEND_URL
-        value: "https://your-project.vercel.app"
+        value: "https://atteendence-automation-system.vercel.app"
 
       # Permanent identifier inside the printed QR poster. Keep it stable —
       # changing it invalidates posters already printed.

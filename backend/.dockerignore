@@ -1,8 +1,27 @@
-__pycache__/
-*.pyc
+# Secrets — env vars are injected by the host, never baked into the image.
 .env
+
+# Python
+__pycache__/
+*.py[cod]
 venv/
 .venv/
-database/*.db
+
+# Local database — the container creates its own empty one.
+database/
+
+# Generated reports
 *.xlsx
 *.pdf
+
+# Deploy configs for other hosts; irrelevant inside the image.
+Dockerfile
+.dockerignore
+render.yaml
+Procfile
+
+# Editors / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
