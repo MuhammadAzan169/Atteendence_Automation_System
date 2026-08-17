@@ -23,7 +23,7 @@ COPY requirements.txt .
 RUN pip install -r requirements.txt
 
 # ---------- stage 2: runtime ------------------------------
-FROM python:3.11-slim AS runtime
+FROM python:3.11-slim AS final
 
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
