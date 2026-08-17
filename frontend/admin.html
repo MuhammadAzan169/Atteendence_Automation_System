@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Dashboard</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<div class="admin-container">
+
+    <!-- ================= HEADER ================= -->
+
+    <div class="dashboard-header">
+
+        <div>
+            <h1>Attendance Automation System</h1>
+            <p>Admin Dashboard</p>
+        </div>
+
+        <div class="admin-user">
+            <i class="fa-solid fa-user-shield"></i>
+            <span id="adminName">...</span>
+        </div>
+
+    </div>
+
+    <div class="dashboard-content">
+
+        <!-- ================= STATISTICS ================= -->
+
+        <div class="left-panel">
+
+            <h2>
+                <i class="fa-solid fa-chart-column"></i>
+                System Statistics
+            </h2>
+
+            <div class="stat-card">
+                <div class="stat-icon blue"><i class="fa-solid fa-users"></i></div>
+                <div class="stat-info">
+                    <h3>Total Employees</h3>
+                    <span id="totalEmployees">-</span>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon green"><i class="fa-solid fa-calendar-check"></i></div>
+                <div class="stat-info">
+                    <h3>Attendance Records</h3>
+                    <span id="totalAttendance">-</span>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon purple"><i class="fa-solid fa-circle-check"></i></div>
+                <div class="stat-info">
+                    <h3>Present Today</h3>
+                    <span id="presentToday">-</span>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon orange"><i class="fa-solid fa-clock"></i></div>
+                <div class="stat-info">
+                    <h3>Late Today</h3>
+                    <span id="lateToday">-</span>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- ================= RECORDS ================= -->
+
+        <div class="right-panel">
+
+            <h2>
+                <i class="fa-solid fa-table"></i>
+                Attendance Records
+            </h2>
+
+            <p class="message" id="error" style="display:none;"></p>
+
+            <div class="search-bar">
+
+                <form id="filterForm">
+
+                    <input type="text" id="search" placeholder="Search Employee...">
+
+                    <input type="date" id="date">
+
+                    <button type="submit">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        Search
+                    </button>
+
+                    <button type="button" id="resetFilters" class="btn-secondary">
+                        <i class="fa-solid fa-rotate-left"></i>
+                        Reset
+                    </button>
+
+                </form>
+
+            </div>
+
+            <div class="table-container">
+
+                <table class="attendance-table">
+
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Employee</th>
+                            <th>Date</th>
+                            <th>Time</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="recordsBody">
+                        <tr><td colspan="5">Loading...</td></tr>
+                    </tbody>
+
+                </table>
+
+            </div>
+
+            <div class="action-buttons">
+
+                <a href="employees.html">
+                    <button><i class="fa-solid fa-users"></i> Employees</button>
+                </a>
+
+                <a href="qr-poster.html">
+                    <button><i class="fa-solid fa-qrcode"></i> QR Poster</button>
+                </a>
+
+                <button id="exportExcel">
+                    <i class="fa-solid fa-file-excel"></i> Excel
+                </button>
+
+                <button id="exportPdf">
+                    <i class="fa-solid fa-file-pdf"></i> PDF
+                </button>
+
+                <a href="dashboard.html">
+                    <button><i class="fa-solid fa-house"></i> Dashboard</button>
+                </a>
+
+                <button class="btn-danger" id="logoutButton">
+                    <i class="fa-solid fa-right-from-bracket"></i> Logout
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script src="js/config.js"></script>
+<script src="js/api.js"></script>
+<script src="js/admin.js"></script>
+
+</body>
+
+</html>

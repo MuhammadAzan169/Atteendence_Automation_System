@@ -1,0 +1,33 @@
+# Environment files (never commit real secrets)
+.env
+backend/.env
+frontend/.env
+
+# Python
+__pycache__/
+*.py[cod]
+venv/
+.venv/
+env/
+
+# Local database
+backend/database/*.db
+*.sqlite3
+
+# Demo video — too large for GitHub's 100 MB file limit
+docs/*.mp4
+
+# Generated reports
+*.xlsx
+*.pdf
+!docs/*.pdf
+
+# Deploy tooling
+.vercel/
+node_modules/
+
+# Editors / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

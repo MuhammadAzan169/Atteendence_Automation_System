@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Company QR Poster</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        /* Print exactly the poster — no buttons, no navigation. */
+        @media print {
+            .no-print { display: none !important; }
+            body { background: white; }
+            .login-card { box-shadow: none; margin: 0; }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="login-card narrow">
+
+    <h1>Attendance Automation System</h1>
+
+    <h2>
+        <i class="fa-solid fa-qrcode"></i>
+        Company QR Code
+    </h2>
+
+    <p>Scan this code with your phone to mark today's attendance.</p>
+
+    <p class="message" id="error" style="display:none;"></p>
+
+    <br>
+
+    <img id="posterQr" alt="Company QR Code" width="320"
+         style="border:8px solid white; border-radius:12px;">
+
+    <p class="hint" id="payload" style="word-break:break-all;"></p>
+
+    <p class="hint">
+        This code is permanent — print it once and it keeps working.
+    </p>
+
+    <br>
+
+    <div class="button-row no-print">
+
+        <button class="btn-success" onclick="window.print()">
+            <i class="fa-solid fa-print"></i>
+            Print Poster
+        </button>
+
+        <a href="admin.html">
+            <button class="btn-secondary">
+                <i class="fa-solid fa-arrow-left"></i>
+                Back to Dashboard
+            </button>
+        </a>
+
+    </div>
+
+</div>
+
+<script src="js/config.js"></script>
+<script src="js/api.js"></script>
+<script>
+    requireAuth(true);
+
+    document.getElementById("posterQr").src = apiUrl("/api/qr/image");
+
+    api("/api/qr/payload")
+        .then((data) => setText("payload", data.payload))
+        .catch((error) => showError("error", error.message));
+</script>
+
+</body>
+
+</html>

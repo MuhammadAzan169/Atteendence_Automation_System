@@ -1,0 +1,30 @@
+services:
+  backend:
+    build: ./backend
+    container_name: attendance-backend
+    env_file:
+      - ./backend/.env
+    environment:
+      # nginx proxies /api to this container, so Flask only serves the API.
+      SERVE_FRONTEND: "false"
+      PORT: "5000"
+      CORS_ORIGINS: "*"
+      FRONTEND_URL: "http://localhost:8080"
+    volumes:
+      # Keeps the SQLite database between container restarts.
+      - attendance-db:/app/database
+    ports:
+      - "5000:5000"
+    restart: unless-stopped
+
+  frontend:
+    build: ./frontend
+    container_name: attendance-frontend
+    depends_on:
+      - backend
+    ports:
+      - "8080:80"
+    restart: unless-stopped
+
+volumes:
+  attendance-db:

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Employee Dashboard</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="centered">
+
+    <div class="login-card narrow">
+
+        <h1>Attendance Automation System</h1>
+
+        <h2>
+            <i class="fa-solid fa-gauge-high"></i>
+            Employee Dashboard
+        </h2>
+
+        <div class="success-message" id="successMessage" style="display:none;">
+            <i class="fa-solid fa-circle-check"></i>
+            Attendance Marked Successfully!
+        </div>
+
+        <h3>
+            <i class="fa-solid fa-circle-user"></i>
+            Welcome, <span id="welcomeName">...</span>!
+        </h3>
+
+        <br>
+
+        <a href="attendance.html">
+            <button class="btn-success">
+                <i class="fa-solid fa-qrcode"></i>
+                Start Attendance
+            </button>
+        </a>
+
+        <br><br>
+
+        <a href="history.html">
+            <button>
+                <i class="fa-solid fa-clock-rotate-left"></i>
+                Attendance History
+            </button>
+        </a>
+
+        <br><br>
+
+        <div id="adminLink" style="display:none;">
+            <a href="admin.html">
+                <button>
+                    <i class="fa-solid fa-user-shield"></i>
+                    Admin Dashboard
+                </button>
+            </a>
+            <br><br>
+        </div>
+
+        <button class="btn-danger" id="logoutButton">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            Logout
+        </button>
+
+    </div>
+
+    <script src="js/config.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/dashboard.js"></script>
+
+</body>
+
+</html>

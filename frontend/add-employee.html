@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Add Employee</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<div class="form-container">
+
+    <div class="form-card">
+
+        <h1>Attendance Automation System</h1>
+
+        <h2>
+            <i class="fa-solid fa-user-plus"></i>
+            Add New Employee
+        </h2>
+
+        <p class="message" id="error" style="display:none;"></p>
+
+        <div class="success-message" id="success" style="display:none;"></div>
+
+        <form id="addEmployeeForm">
+
+            <div class="form-group">
+                <label><i class="fa-solid fa-user"></i> Username</label>
+                <input type="text" id="username" placeholder="Enter Username" required>
+            </div>
+
+            <div class="form-group">
+                <label><i class="fa-solid fa-lock"></i> Password</label>
+                <input type="password" id="password" placeholder="Enter Password" required>
+            </div>
+
+            <div class="form-group">
+                <label><i class="fa-solid fa-id-card"></i> Full Name</label>
+                <input type="text" id="full_name" placeholder="Enter Full Name" required>
+            </div>
+
+            <div class="form-group">
+                <label><i class="fa-solid fa-building"></i> Department</label>
+                <input type="text" id="department" placeholder="Enter Department" required>
+            </div>
+
+            <div class="form-group">
+                <label><i class="fa-solid fa-user-shield"></i> Role</label>
+                <select id="role">
+                    <option value="employee">Employee</option>
+                    <option value="admin">Administrator</option>
+                </select>
+            </div>
+
+            <div class="button-row">
+
+                <button type="submit" class="btn-success" id="submitButton">
+                    <i class="fa-solid fa-user-plus"></i>
+                    Add Employee
+                </button>
+
+                <a href="employees.html">
+                    <button type="button" class="btn-secondary">
+                        <i class="fa-solid fa-arrow-left"></i>
+                        Back to Employee List
+                    </button>
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+<script src="js/config.js"></script>
+<script src="js/api.js"></script>
+<script src="js/add-employee.js"></script>
+
+</body>
+
+</html>

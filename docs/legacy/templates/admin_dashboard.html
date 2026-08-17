@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Dashboard</title>
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+    <!-- CSS -->
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+<div class="admin-container">
+
+    <!-- ==========================
+         HEADER
+    =========================== -->
+
+    <div class="dashboard-header">
+
+        <div>
+
+            <h1>Attendance Automation System</h1>
+
+            <p>Admin Dashboard</p>
+
+        </div>
+
+        <div class="admin-user">
+
+            <i class="fa-solid fa-user-shield"></i>
+
+            <span>{{ session['username'] }}</span>
+
+        </div>
+
+    </div>
+
+    <!-- ==========================
+         MAIN CONTENT
+    =========================== -->
+
+    <div class="dashboard-content">
+
+        <!-- ==========================
+             LEFT PANEL
+        =========================== -->
+
+        <div class="left-panel">
+
+            <h2>
+
+                <i class="fa-solid fa-chart-column"></i>
+
+                System Statistics
+
+            </h2>
+
+            <div class="stat-card">
+
+                <div class="stat-icon blue">
+
+                    <i class="fa-solid fa-users"></i>
+
+                </div>
+
+                <div class="stat-info">
+
+                    <h3>Total Employees</h3>
+
+                    <span>{{ total_employees }}</span>
+
+                </div>
+
+            </div>
+
+            <div class="stat-card">
+
+                <div class="stat-icon green">
+
+                    <i class="fa-solid fa-calendar-check"></i>
+
+                </div>
+
+                <div class="stat-info">
+
+                    <h3>Attendance Records</h3>
+
+                    <span>{{ total_attendance }}</span>
+
+                </div>
+
+            </div>
+
+            <div class="stat-card">
+
+                <div class="stat-icon purple">
+
+                    <i class="fa-solid fa-circle-check"></i>
+
+                </div>
+
+                <div class="stat-info">
+
+                    <h3>Present Today</h3>
+
+                    <span>{{ present_today }}</span>
+
+                </div>
+
+            </div>
+
+            <div class="stat-card">
+
+                <div class="stat-icon orange">
+
+                    <i class="fa-solid fa-clock"></i>
+
+                </div>
+
+                <div class="stat-info">
+
+                    <h3>Late Today</h3>
+
+                    <span>{{ late_today }}</span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- ==========================
+     RIGHT PANEL
+=========================== -->
+
+<div class="right-panel">
+
+    <h2>
+        <i class="fa-solid fa-table"></i>
+        Attendance Records
+    </h2>
+
+    <!-- Search & Filter -->
+
+    <div class="search-bar">
+
+        <form method="GET" action="{{ url_for('admin_dashboard') }}">
+
+            <input
+                type="text"
+                name="search"
+                placeholder="Search Employee..."
+                value="{{ search }}">
+
+            <input
+                type="date"
+                name="date"
+                value="{{ selected_date }}">
+
+            <button type="submit">
+
+                <i class="fa-solid fa-magnifying-glass"></i>
+
+                Search
+
+            </button>
+
+        </form>
+
+    </div>
+
+    <!-- Attendance Table -->
+
+    <div class="table-container">
+
+        <table class="attendance-table">
+
+            <thead>
+
+                <tr>
+
+                    <th>ID</th>
+
+                    <th>Employee</th>
+
+                    <th>Date</th>
+
+                    <th>Time</th>
+
+                    <th>Status</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                {% for record in records %}
+
+                <tr>
+
+                    <td>{{ record[0] }}</td>
+
+                    <td>{{ record[1] }}</td>
+
+                    <td>{{ record[2] }}</td>
+
+                    <td>{{ record[3] }}</td>
+
+                    <td>
+
+                        {% if record[4] == "Present" %}
+
+                            <span class="status-present">
+
+                                <i class="fa-solid fa-circle-check"></i>
+
+                                Present
+
+                            </span>
+
+                        {% else %}
+
+                            <span class="status-late">
+
+                                <i class="fa-solid fa-clock"></i>
+
+                                Late
+
+                            </span>
+
+                        {% endif %}
+
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+    <!-- Action Buttons -->
+
+    <div class="action-buttons">
+
+        <a href="{{ url_for('employees') }}">
+
+            <button>
+
+                <i class="fa-solid fa-users"></i>
+
+                Employees
+
+            </button>
+
+        </a>
+
+        <a href="{{ url_for('export_excel') }}">
+
+            <button>
+
+                <i class="fa-solid fa-file-excel"></i>
+
+                Excel
+
+            </button>
+
+        </a>
+
+        <a href="{{ url_for('export_pdf') }}">
+
+            <button>
+
+                <i class="fa-solid fa-file-pdf"></i>
+
+                PDF
+
+            </button>
+
+        </a>
+
+        <a href="{{ url_for('dashboard') }}">
+
+            <button>
+
+                <i class="fa-solid fa-house"></i>
+
+                Dashboard
+
+            </button>
+
+        </a>
+
+    </div>
+
+</div>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

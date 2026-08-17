@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Camera Verification</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+    <div class="login-card">
+
+        <h1>Attendance Automation System</h1>
+
+        <h2>Camera Verification</h2>
+
+        <p>Please capture your photo before submitting your attendance.</p>
+
+        <br>
+
+        <video id="video" width="320" height="240" autoplay></video>
+
+        <br><br>
+
+        <button onclick="capturePhoto()">Capture Photo</button>
+
+        <br><br>
+
+        <canvas id="canvas" width="320" height="240" style="display:none;"></canvas>
+
+        <img id="photo" width="320" alt="Captured Photo">
+
+        <br><br>
+
+        <a href="{{ url_for('attendance_success') }}">
+            <button>Submit Attendance</button>
+        </a>
+
+    </div>
+
+    <script>
+
+        const video = document.getElementById("video");
+
+        navigator.mediaDevices.getUserMedia({ video: true })
+            .then(function(stream) {
+                video.srcObject = stream;
+            })
+            .catch(function(error) {
+                alert("Camera access denied or camera not found.");
+            });
+
+        function capturePhoto() {
+
+            const canvas = document.getElementById("canvas");
+            const context = canvas.getContext("2d");
+
+            context.drawImage(video, 0, 0, 320, 240);
+
+            document.getElementById("photo").src = canvas.toDataURL("image/png");
+        }
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,6 @@
+# Never upload these to the public static site.
+.env
+.env.example
+Dockerfile
+nginx.conf
+.dockerignore

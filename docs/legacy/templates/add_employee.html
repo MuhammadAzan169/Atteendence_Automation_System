@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Add Employee</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+<div class="form-container">
+
+    <div class="form-card">
+
+        <h1>Attendance Automation System</h1>
+
+        <h2>
+            <i class="fa-solid fa-user-plus"></i>
+            Add New Employee
+        </h2>
+
+        <form method="POST">
+
+    <!-- Username -->
+
+    <div class="form-group">
+
+        <label>
+            <i class="fa-solid fa-user"></i>
+            Username
+        </label>
+
+        <input
+            type="text"
+            name="username"
+            placeholder="Enter Username"
+            required>
+
+    </div>
+
+    <!-- Password -->
+
+    <div class="form-group">
+
+        <label>
+            <i class="fa-solid fa-lock"></i>
+            Password
+        </label>
+
+        <input
+            type="password"
+            name="password"
+            placeholder="Enter Password"
+            required>
+
+    </div>
+
+    <!-- Full Name -->
+
+    <div class="form-group">
+
+        <label>
+            <i class="fa-solid fa-id-card"></i>
+            Full Name
+        </label>
+
+        <input
+            type="text"
+            name="full_name"
+            placeholder="Enter Full Name"
+            required>
+
+    </div>
+
+    <!-- Department -->
+
+    <div class="form-group">
+
+        <label>
+            <i class="fa-solid fa-building"></i>
+            Department
+        </label>
+
+        <input
+            type="text"
+            name="department"
+            placeholder="Enter Department"
+            required>
+
+    </div>
+
+    <!-- Buttons -->
+
+    <div class="button-row">
+
+    <button type="submit" class="btn-success">
+
+        <i class="fa-solid fa-user-plus"></i>
+
+        Add Employee
+
+    </button>
+
+    <a href="{{ url_for('employees') }}">
+
+        <button type="button" class="btn-secondary">
+
+            <i class="fa-solid fa-arrow-left"></i>
+
+            Back to Employee List
+
+        </button>
+
+    </a>
+
+</div>
+
+</form>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Attendance Verification</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<div class="login-card narrow">
+
+    <h1>Attendance Automation System</h1>
+
+    <h2>
+        <i class="fa-solid fa-shield-halved"></i>
+        Attendance Verification
+    </h2>
+
+    <p>Complete all three steps to mark your attendance.</p>
+
+    <p class="message" id="error" style="display:none;"></p>
+
+    <!-- ================= STEP 1: QR ================= -->
+
+    <div id="qrArea">
+
+        <h3>
+            <i class="fa-solid fa-qrcode"></i>
+            QR Verification
+        </h3>
+
+        <button id="scanQR" class="btn-success">
+            <i class="fa-solid fa-camera"></i>
+            Scan Company QR Code
+        </button>
+
+        <div id="scannerWrapper" style="display:none; margin-top:20px;">
+
+            <video id="scannerPreview" width="320" height="240" autoplay muted playsinline
+                   style="border-radius:12px; border:2px solid #1565c0;"></video>
+
+            <canvas id="scannerCanvas" style="display:none;"></canvas>
+
+            <p class="hint">Point your camera at the company QR poster.</p>
+
+            <button id="cancelScan" class="btn-secondary">
+                <i class="fa-solid fa-xmark"></i>
+                Cancel Scan
+            </button>
+
+        </div>
+
+        <p class="hint" style="display:block; margin-top:18px;">
+            No poster nearby? Show the code on this screen instead:
+        </p>
+
+        <button id="showQR" class="btn-secondary">
+            <i class="fa-solid fa-image"></i>
+            Show QR Code
+        </button>
+
+        <div id="qrImageWrapper" style="display:none; margin-top:25px;">
+
+            <img id="qrImage" alt="Company QR Code" width="250">
+
+            <br><br>
+
+            <button id="verifyQR" class="btn-success">
+                <i class="fa-solid fa-check"></i>
+                Verify QR
+            </button>
+
+        </div>
+
+    </div>
+
+    <p class="step-done" id="qrSuccess" style="display:none;">
+        ✅ QR Verification Completed
+    </p>
+
+    <!-- ================= STEP 2: GPS ================= -->
+
+    <div id="gpsSection" style="display:none; margin-top:30px;">
+
+        <h3>
+            <i class="fa-solid fa-location-dot"></i>
+            GPS Verification
+        </h3>
+
+        <button id="verifyGPS" class="btn-success">
+            <i class="fa-solid fa-location-crosshairs"></i>
+            Verify GPS
+        </button>
+
+    </div>
+
+    <p class="step-done" id="gpsSuccess" style="display:none;">
+        ✅ GPS Verification Completed
+    </p>
+
+    <!-- ================= STEP 3: CAMERA ================= -->
+
+    <div id="cameraSection" style="display:none; margin-top:30px;">
+
+        <h3>
+            <i class="fa-solid fa-camera"></i>
+            Camera Verification
+        </h3>
+
+        <button id="openCamera" class="btn-success">
+            <i class="fa-solid fa-camera"></i>
+            Open Camera
+        </button>
+
+        <br><br>
+
+        <video id="cameraPreview" width="320" height="240" autoplay playsinline
+               style="display:none; border-radius:12px; border:2px solid #1565c0;"></video>
+
+        <canvas id="photoCanvas" width="320" height="240" style="display:none;"></canvas>
+
+        <br><br>
+
+        <button id="capturePhoto" class="btn-success" style="display:none;">
+            <i class="fa-solid fa-camera-retro"></i>
+            Capture Photo &amp; Submit
+        </button>
+
+    </div>
+
+    <!-- ================= RESULT ================= -->
+
+    <div id="attendanceResult"
+         style="display:none; margin-top:30px; padding:25px;
+                background:#e8f5e9; border-radius:12px;">
+
+        <h2 style="color:#2e7d32;">
+            <i class="fa-solid fa-circle-check"></i>
+            <span id="resultTitle">Attendance Marked Successfully</span>
+        </h2>
+
+        <p id="resultDetail"></p>
+
+        <br>
+
+        <a href="dashboard.html">
+            <button class="btn-success">
+                <i class="fa-solid fa-house"></i>
+                Return to Dashboard
+            </button>
+        </a>
+
+    </div>
+
+    <br>
+
+    <a href="dashboard.html">
+        <button class="btn-secondary">
+            <i class="fa-solid fa-arrow-left"></i>
+            Back to Dashboard
+        </button>
+    </a>
+
+</div>
+
+<!-- jsQR decodes the camera frames on browsers without the native
+     BarcodeDetector API — which is most desktop browsers, including Chrome
+     on Windows. Bundled locally rather than loaded from a CDN so scanning
+     never depends on a third party being reachable. -->
+<script src="js/vendor/jsQR.js"></script>
+
+<script src="js/config.js"></script>
+<script src="js/api.js"></script>
+<script src="js/attendance.js"></script>
+
+</body>
+
+</html>

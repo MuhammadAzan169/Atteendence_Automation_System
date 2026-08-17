@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Attendance Verification</title>
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+    <!-- CSS -->
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+<div class="login-card">
+
+    <h1>Attendance Automation System</h1>
+
+    <h2>Attendance Verification</h2>
+
+    <p>Please complete the verification process to mark your attendance.</p>
+
+    <br>
+
+    <!-- ==========================
+         QR SECTION
+    =========================== -->
+
+    <div id="qr-area">
+
+        <button id="generateQR" class="btn-success">
+
+            <i class="fa-solid fa-qrcode"></i>
+
+            Generate QR Code
+
+        </button>
+
+        <div id="qrImage"
+             style="display:none; margin-top:25px;">
+
+            <img src="{{ url_for('static', filename='images/company_qr.png') }}"
+                 alt="Company QR Code"
+                 width="250">
+
+            <br><br>
+
+            <button id="verifyQR"
+                    class="btn-success">
+
+                <i class="fa-solid fa-check"></i>
+
+                Verify QR
+
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- QR SUCCESS -->
+
+    <p id="qrSuccess"
+       style="display:none;
+              color:green;
+              font-weight:bold;
+              margin-top:20px;">
+
+        ✅ QR Verification Completed
+
+    </p>
+
+    <!-- ==========================
+         GPS SECTION
+    =========================== -->
+
+    <div id="gpsSection"
+         style="display:none;
+                margin-top:30px;">
+
+        <h3>
+
+            <i class="fa-solid fa-location-dot"></i>
+
+            GPS Verification
+
+        </h3>
+
+        <button id="verifyGPS"
+                class="btn-success">
+
+            <i class="fa-solid fa-location-crosshairs"></i>
+
+            Verify GPS
+
+        </button>
+
+    </div>
+
+    <!-- GPS SUCCESS -->
+
+    <p id="gpsSuccess"
+       style="display:none;
+              color:green;
+              font-weight:bold;
+              margin-top:20px;">
+
+        ✅ GPS Verification Completed
+
+    </p>
+
+<!-- ==========================
+     CAMERA SECTION
+=========================== -->
+
+<div id="cameraSection"
+     style="display:none; margin-top:30px;">
+
+    <h3>
+
+        <i class="fa-solid fa-camera"></i>
+
+        Camera Verification
+
+    </h3>
+
+    <button id="verifyCamera" class="btn-success">
+
+        <i class="fa-solid fa-camera"></i>
+
+        Open Camera
+
+    </button>
+
+    <br><br>
+
+    <video id="cameraPreview"
+           width="320"
+           height="240"
+           autoplay
+           style="display:none; border-radius:12px; border:2px solid #1565c0;">
+    </video>
+
+    <!-- ADD THE CANVAS RIGHT HERE -->
+    <canvas id="photoCanvas"
+            width="320"
+            height="240"
+            style="display:none;
+                   border:2px solid #1565c0;
+                   border-radius:12px;">
+    </canvas>
+
+    <br><br>
+
+    <button id="capturePhoto"
+            class="btn-success"
+            style="display:none;">
+
+        <i class="fa-solid fa-camera-retro"></i>
+
+        Capture Photo
+
+    </button>
+
+</div>
+
+    <!-- CAMERA SUCCESS -->
+
+    <p id="cameraSuccess"
+       style="display:none;
+              color:green;
+              font-weight:bold;
+              margin-top:20px;">
+
+        ✅ Camera Verification Completed
+
+    </p>
+
+    <!-- ==========================
+         ATTENDANCE SUCCESS
+    =========================== -->
+
+    <div id="attendanceSuccess"
+         style="display:none;
+                margin-top:30px;
+                padding:25px;
+                background:#e8f5e9;
+                border-radius:12px;">
+
+        <h2 style="color:#2e7d32;">
+
+            <i class="fa-solid fa-circle-check"></i>
+
+            Attendance Marked Successfully
+
+        </h2>
+
+        <p>
+
+            Your attendance has been recorded successfully.
+
+        </p>
+
+        <br>
+
+        <a href="{{ url_for('dashboard') }}">
+
+            <button class="btn-success">
+
+                <i class="fa-solid fa-house"></i>
+
+                Return to Dashboard
+
+            </button>
+
+        </a>
+
+    </div>
+
+</div>
+
+<!-- ==========================
+     JAVASCRIPT
+=========================== -->
+
+<script>
+
+document.getElementById("generateQR").addEventListener("click", function(){
+
+    document.getElementById("qrImage").style.display = "block";
+    this.style.display = "none";
+
+});
+
+document.getElementById("verifyQR").addEventListener("click", function(){
+
+    document.getElementById("qrSuccess").style.display = "block";
+    document.getElementById("gpsSection").style.display = "block";
+
+    this.disabled = true;
+
+    this.innerHTML =
+        '<i class="fa-solid fa-circle-check"></i> Verified';
+
+});
+
+document.getElementById("verifyGPS").addEventListener("click", function () {
+
+    const gpsButton = this;
+
+    if (navigator.geolocation) {
+
+        navigator.geolocation.getCurrentPosition(
+
+            function(position) {
+
+                document.getElementById("gpsSuccess").style.display = "block";
+                document.getElementById("cameraSection").style.display = "block";
+
+                gpsButton.disabled = true;
+
+                gpsButton.innerHTML =
+                    '<i class="fa-solid fa-circle-check"></i> GPS Verified';
+
+            },
+
+            function(error) {
+
+                alert("Location access is required to mark attendance.");
+
+            }
+
+        );
+
+    } else {
+
+        alert("Geolocation is not supported by your browser.");
+
+    }
+
+});
+
+// ==========================
+// CAMERA
+// ==========================
+
+let stream;
+
+document.getElementById("verifyCamera").addEventListener("click", async function(){
+
+    try{
+
+        stream = await navigator.mediaDevices.getUserMedia({
+            video:true
+        });
+
+        const video = document.getElementById("cameraPreview");
+
+        video.srcObject = stream;
+
+        video.style.display = "block";
+
+        document.getElementById("capturePhoto").style.display = "inline-block";
+
+        this.disabled = true;
+
+        this.innerHTML =
+            '<i class="fa-solid fa-circle-check"></i> Camera Opened';
+
+    }
+
+    catch(error){
+
+        alert("Camera permission is required.");
+
+    }
+
+});
+
+// ==========================
+// CAPTURE PHOTO
+// ==========================
+
+document.getElementById("capturePhoto").addEventListener("click", function(){
+
+    stream.getTracks().forEach(track => track.stop());
+
+    window.location.href = "/attendance-success";
+
+});
+
+</script>

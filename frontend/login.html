@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Employee Login</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="centered">
+
+    <div class="login-card narrow">
+
+        <h1>Attendance Automation System</h1>
+
+        <h2>
+            <i class="fa-solid fa-right-to-bracket"></i>
+            Employee Login
+        </h2>
+
+        <form id="loginForm">
+
+            <input
+                type="text"
+                id="username"
+                placeholder="Enter Username"
+                autocomplete="username"
+                required>
+
+            <br><br>
+
+            <input
+                type="password"
+                id="password"
+                placeholder="Enter Password"
+                autocomplete="current-password"
+                required>
+
+            <br><br>
+
+            <button type="submit" id="submitButton">
+                <i class="fa-solid fa-arrow-right-to-bracket"></i>
+                Login
+            </button>
+
+        </form>
+
+        <p class="message" id="error" style="display:none;"></p>
+        <p class="hint" id="hint" style="display:none;"></p>
+
+    </div>
+
+    <script src="js/config.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/login.js"></script>
+
+</body>
+
+</html>

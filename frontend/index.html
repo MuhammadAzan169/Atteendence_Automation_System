@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Attendance Automation System</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="centered">
+
+    <div class="login-card narrow">
+
+        <h1>Attendance Automation System</h1>
+
+        <h2>
+            <i class="fa-solid fa-qrcode"></i>
+            Welcome
+        </h2>
+
+        <p>
+            Mark your attendance securely using QR code, GPS and camera
+            verification.
+        </p>
+
+        <br>
+
+        <a href="login.html">
+            <button class="btn-success">
+                <i class="fa-solid fa-right-to-bracket"></i>
+                Employee Login
+            </button>
+        </a>
+
+    </div>
+
+    <script src="js/config.js"></script>
+    <script src="js/api.js"></script>
+    <script>
+        // Already signed in? Go straight to the dashboard.
+        if (Auth.token && Auth.user) {
+            window.location.href = "dashboard.html";
+        }
+    </script>
+
+</body>
+
+</html>

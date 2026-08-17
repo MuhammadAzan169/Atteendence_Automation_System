@@ -1,0 +1,47 @@
+# Render Blueprint — free tier.
+# In Render: New > Blueprint, point it at this repository.
+services:
+  - type: web
+    name: attendance-api
+    runtime: python
+    plan: free
+    rootDir: backend
+    autoDeploy: true
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn --bind 0.0.0.0:$PORT --workers 2 --timeout 120 wsgi:app
+    healthCheckPath: /api/health
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.11.9"
+
+      - key: SECRET_KEY
+        generateValue: true
+
+      # Render serves the API only; Vercel serves the pages.
+      - key: SERVE_FRONTEND
+        value: "false"
+      - key: FLASK_DEBUG
+        value: "false"
+
+      # Replace both with your Vercel URL after the first frontend deploy,
+      # e.g. https://attendance-system.vercel.app
+      - key: CORS_ORIGINS
+        value: "*"
+      - key: FRONTEND_URL
+        value: "https://your-project.vercel.app"
+
+      # Permanent identifier inside the printed QR poster. Keep it stable —
+      # changing it invalidates posters already printed.
+      - key: COMPANY_CODE
+        value: "AAS-COMPANY-QR-001"
+
+      - key: ADMIN_USERNAME
+        value: admin
+      - key: ADMIN_PASSWORD
+        sync: false   # set your own value in the Render dashboard
+
+      # Storage: leave DATABASE_URL unset to use SQLite (wiped on redeploy),
+      # or paste a free PostgreSQL URL from Supabase or Neon — unlike
+      # Render's own free database, those do not expire after 30 days.
+      - key: DATABASE_URL
+        sync: false
